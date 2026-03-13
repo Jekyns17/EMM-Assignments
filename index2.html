@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Health Diagnosis</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="bg-slideshow">
+    <div class="bg-slide"></div>
+    <div class="bg-slide"></div>
+    <div class="bg-slide"></div>
+    <div class="bg-slide"></div>
+    <div class="bg-slide"></div>
+  </div>
+  <div class="page-content">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-name">Smart Health</span>
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="index2.html" class="active">Diagnosis</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel" aria-labelledby="disease-heading">
+      <h2 id="disease-heading">Common Diseases</h2>
+      <p class="lead">Click a card to learn more and watch a short informational clip.</p>
+
+      <div class="disease-grid" id="diseaseGrid"></div>
+
+      <div class="modal" id="diseaseModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+        <div class="modal-backdrop" data-close="true"></div>
+        <div class="modal-content">
+          <button class="modal-close" data-close="true" aria-label="Close">×</button>
+          <h3 id="modalTitle"></h3>
+          <p id="modalDescription" class="modal-text"></p>
+          <div class="modal-video" id="modalVideoContainer"></div>
+          <p class="modal-footnote">This information is for learning purposes only. Consult a healthcare professional.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="symptoms-heading">
+      <h2 id="symptoms-heading">Enter Symptoms</h2>
+      <form id="diagnosisForm" class="diagnosis-form" novalidate>
+        <label for="symptoms" class="sr-only">Symptoms</label>
+        <textarea id="symptoms" name="symptoms" placeholder="Type symptoms (e.g. fever, cough)" autocomplete="off" rows="3"></textarea>
+        <span class="field-error" id="symptomsError" aria-live="polite"></span>
+        <button type="submit" class="primary-button">Diagnose</button>
+      </form>
+
+      <div id="loading" class="loading" aria-live="polite"></div>
+      <div id="result" class="result"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Smart Health System. Built for educational purposes.</p>
+    </div>
+  </footer>
+
+  </div>
+
+  <script src="Script.js"></script>
+</body>
+
+</html>

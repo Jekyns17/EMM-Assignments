@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart Health System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="bg-slideshow">
+    <div class="bg-slide"></div>
+    <div class="bg-slide"></div>
+    <div class="bg-slide"></div>
+    <div class="bg-slide"></div>
+    <div class="bg-slide"></div>
+  </div>
+  <div class="page-content">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-name">Smart Health</span>
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary">
+        <a href="index.html" class="active">Home</a>
+        <a href="index2.html">Diagnosis</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Smart Health Diagnosis</h1>
+      <p class="lead">Enter a few details and symptoms to get a quick, educational overview of possible conditions.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="patient-info-heading">
+      <h2 id="patient-info-heading">Patient Information</h2>
+
+      <form id="patientForm" novalidate>
+        <div class="field-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" min="0" placeholder="e.g. 28" required>
+          <span class="field-error" id="ageError" aria-live="polite"></span>
+        </div>
+
+        <div class="field-group">
+          <label for="sex">Sex</label>
+          <select id="sex" name="sex" required>
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="none">Prefer not to say</option>
+          </select>
+          <span class="field-error" id="sexError" aria-live="polite"></span>
+        </div>
+
+        <div class="field-group">
+          <label for="weight">Weight (kg)</label>
+          <input type="number" id="weight" name="weight" min="1" placeholder="e.g. 70" required>
+          <span class="field-error" id="weightError" aria-live="polite"></span>
+        </div>
+
+        <button type="submit" class="primary-button">Continue</button>
+      </form>
+
+      <p class="disclaimer">
+        <strong>Disclaimer:</strong> This Smart Health Diagnosis System is for informational purposes only. It does not replace professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider for serious concerns.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Smart Health System. Built for educational purposes.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
