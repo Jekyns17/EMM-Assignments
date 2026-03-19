@@ -1,15 +1,14 @@
-/* Base */
 :root {
-  --bg: #e8f0ff;
-  --panel: #ffffff;
-  --text: #1f2937;
-  --muted: #4b5563;
+  --bg: #d1e7ff;
+  --panel: #f8f9fa;
+  --text: #0f1419;
+  --muted: #374151;
   --primary: #0b6eac;
   --primary-2: #064c74;
   --accent: #b83280;
   --danger: #dc2626;
-  --border: rgba(15, 23, 42, 0.12);
-  --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --border: rgba(15, 23, 42, 0.15);
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
   --radius: 14px;
   --max: 1080px;
 }
@@ -17,9 +16,10 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: linear-gradient(135deg, rgba(232, 240, 255, 1) 0%, rgba(253, 243, 255, 1) 60%);
+  background: linear-gradient(135deg, rgba(209, 231, 255, 0.8) 0%, rgba(248, 249, 250, 0.9) 60%);
   color: var(--text);
   line-height: 1.5;
+  font-size: 1.1rem;
 }
 
 * {
@@ -418,11 +418,12 @@ textarea:focus {
 .bg-slide.active{
 	opacity:1;
 }
-.bg-slide:nth-child(1) { background-image: url('hospital-1.webp'); }
-.bg-slide:nth-child(2) { background-image: url('hospital-2.webp'); }
-.bg-slide:nth-child(3) { background-image: url('hospital-3.webp'); }
-.bg-slide:nth-child(4) { background-image: url('hospital-4.webp'); }
-.bg-slide:nth-child(5) { background-image: url('Hopital-5.webp'); }
+.bg-slide:nth-child(1) { background-image: url('images/healthcare-1.jpg'); }
+.bg-slide:nth-child(2) { background-image: url('images/healthcare-2.jpg'); }
+.bg-slide:nth-child(3) { background-image: url('images/healthcare-3.jpg'); }
+.bg-slide:nth-child(4) { background-image: url('images/healthcare-4.jpg'); }
+.bg-slide:nth-child(5) { background-image: url('images/healthcare-5.jpg'); }
+.bg-slide:nth-child(6) { background-image: url('images/healthcare-6.jpg'); }
 
 /* ensure page content sits above slideshow */
 .page-content{
@@ -465,7 +466,7 @@ textarea:focus {
 	background-repeat:no-repeat;
 	opacity:0;
 	animation-name: bg-fade;
-	animation-duration: 15s; /* total cycle per slide set */
+	animation-duration: 30s; /* total cycle per slide set (6 slides * 5s) */
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;
 	animation-fill-mode: both;
@@ -476,26 +477,28 @@ textarea:focus {
 	 Adjust the delays and duration to change timing. */
 .bg-slideshow .bg-slide:nth-child(1){
 	animation-delay: 0s;
-	background-image: url('hospital-1.webp');
+	background-image: url('images/healthcare-1.jpg');
 }
 .bg-slideshow .bg-slide:nth-child(2){
 	animation-delay: 5s;
-	background-image: url('hospital-2.webp');
+	background-image: url('images/healthcare-2.jpg');
 }
 .bg-slideshow .bg-slide:nth-child(3){
 	animation-delay: 10s;
-	background-image: url('hospital-3.webp');
+	background-image: url('images/healthcare-3.jpg');
 }
 .bg-slideshow .bg-slide:nth-child(4){
 	animation-delay: 15s;
-	background-image: url('hospital-4.webp');
+	background-image: url('images/healthcare-4.jpg');
 }
 .bg-slideshow .bg-slide:nth-child(5){
 	animation-delay: 20s;
-	background-image: url('hospital-5.webp');
+	background-image: url('images/healthcare-5.jpg');
 }
-
-/* Optional: add more nth-child rules for extra slides */
+.bg-slideshow .bg-slide:nth-child(6){
+	animation-delay: 25s;
+	background-image: url('images/healthcare-6.jpg');
+}
 
 /* mobile perf note: consider disabling animation on small screens */
 @media (max-width:600px){
