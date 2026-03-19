@@ -1,16 +1,47 @@
-﻿/* Shared data */
-const diseases = [
+﻿const diseases = [
   {
     name: "Flu",
-    symptoms: ["cough", "tiredness", "sore throat", "fever"],
+    symptoms: ["cough", "tiredness", "sore throat", "fever", "runny nose", "headache", "body aches"],
     medication: "Paracetamol, flu tablets",
-    prevention: "Drink warm fluids and rest.",
+    prevention: "Drink warm fluids, rest, and wash hands regularly.",
     video: "https://youtu.be/MfX6xGdQco0?si=RDFRL9z34yDXBngW",
     description: "A common viral infection that affects the nose, throat, and lungs."
   },
   {
+    name: "Common Cold",
+    symptoms: ["sneezing", "runny nose", "sore throat", "cough", "mild fever", "headache"],
+    medication: "Rest, fluids, decongestants, throat lozenges",
+    prevention: "Wash hands, cover coughs, and avoid close contact with sick people.",
+    video: "https://www.youtube.com/watch?v=5Gv7EFaF5NI",
+    description: "A mild viral infection of the upper respiratory tract."
+  },
+  {
+    name: "COVID-19",
+    symptoms: ["fever", "cough", "tiredness", "loss of taste or smell", "shortness of breath", "sore throat"],
+    medication: "Seek medical care; follow local health guidelines and supportive treatment.",
+    prevention: "Vaccination, wear masks in crowded places, and maintain physical distance.",
+    video: "https://www.youtube.com/watch?v=BtN-goy9VOY",
+    description: "A respiratory illness caused by the SARS-CoV-2 virus."
+  },
+  {
+    name: "Asthma",
+    symptoms: ["shortness of breath", "wheezing", "chest tightness", "coughing"],
+    medication: "Inhalers (bronchodilators), corticosteroids",
+    prevention: "Avoid triggers, follow an asthma action plan, and use medications as prescribed.",
+    video: "https://www.youtube.com/watch?v=p5ZkZ1mNQ7I",
+    description: "A chronic lung condition that causes airways to narrow and swell."
+  },
+  {
+    name: "Migraine",
+    symptoms: ["headache", "nausea", "sensitivity to light", "sensitivity to sound", "aura"],
+    medication: "Pain relievers, triptans, and anti-nausea medication",
+    prevention: "Manage stress, avoid triggers, and maintain a regular sleep schedule.",
+    video: "https://www.youtube.com/watch?v=QLg25iR9bFA",
+    description: "A neurological condition that causes intense, recurring headaches."
+  },
+  {
     name: "Food Poisoning",
-    symptoms: ["vomiting", "stomach pain", "tiredness"],
+    symptoms: ["vomiting", "stomach pain", "tiredness", "diarrhea", "nausea"],
     medication: "Oral rehydration salts",
     prevention: "Eat clean food and wash hands.",
     video: "https://youtu.be/BCRW2o15qsQ?si=qHpezSjXAu2rG6Lu",
@@ -18,7 +49,7 @@ const diseases = [
   },
   {
     name: "Malaria",
-    symptoms: ["fever", "chills", "sweating", "headache", "muscle pain"],
+    symptoms: ["fever", "chills", "sweating", "headache", "muscle pain", "nausea"],
     medication: "Antimalarial drugs prescribed by a doctor",
     prevention: "Use mosquito nets and repellents.",
     video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
@@ -26,7 +57,7 @@ const diseases = [
   },
   {
     name: "HIV/AIDS",
-    symptoms: ["weight loss", "fever", "night sweats", "fatigue", "recurrent infections"],
+    symptoms: ["weight loss", "fever", "night sweats", "fatigue", "recurrent infections", "swollen lymph nodes"],
     medication: "Antiretroviral therapy (ART)",
     prevention: "Practice safe sex and avoid sharing needles.",
     video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
@@ -34,7 +65,7 @@ const diseases = [
   },
   {
     name: "Tuberculosis",
-    symptoms: ["persistent cough", "chest pain", "fever", "night sweats", "weight loss"],
+    symptoms: ["persistent cough", "chest pain", "fever", "night sweats", "weight loss", "coughing blood"],
     medication: "Antibiotics (DOTS regimen)",
     prevention: "Early diagnosis and treatment, BCG vaccination.",
     video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
@@ -42,11 +73,19 @@ const diseases = [
   },
   {
     name: "Cholera",
-    symptoms: ["watery diarrhea", "vomiting", "dehydration", "muscle cramps"],
+    symptoms: ["watery diarrhea", "vomiting", "dehydration", "muscle cramps", "rapid heart rate"],
     medication: "Oral rehydration solution (ORS), antibiotics in severe cases",
     prevention: "Drink clean water and maintain sanitation.",
     video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     description: "A bacterial infection causing severe dehydration."
+  },
+  {
+    name: "Chickenpox",
+    symptoms: ["fever", "itchy rash", "blisters", "fatigue"],
+    medication: "Antihistamines, calamine lotion, antiviral medication in severe cases",
+    prevention: "Vaccination (varicella vaccine)",
+    video: "https://www.youtube.com/watch?v=Q0gKfPpVw7M",
+    description: "A viral infection that causes an itchy, blister-like rash."
   },
   {
     name: "Genital Herpes",
