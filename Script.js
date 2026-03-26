@@ -1,4 +1,4 @@
-﻿const diseases = [
+const diseases = [
   {
     name: "Flu",
     symptoms: ["cough", "tiredness", "sore throat", "fever", "runny nose", "headache", "body aches"],
@@ -97,6 +97,8 @@
   }
 ];
 
+// ─── Utilities ────────────────────────────────────────────────────────────────
+
 function getById(id) {
   return document.getElementById(id);
 }
@@ -107,70 +109,135 @@ function setYear() {
 }
 
 function setStoredPatientInfo() {
-  const age = localStorage.getItem("age");
-  const sex = localStorage.getItem("sex");
+  const age    = localStorage.getItem("age");
+  const sex    = localStorage.getItem("sex");
   const weight = localStorage.getItem("weight");
 
   if (age && sex && weight) {
     const form = getById("patientForm");
     if (!form) return;
-    form.querySelector("#age").value = age;
-    form.querySelector("#sex").value = sex;
+    form.querySelector("#age").value    = age;
+    form.querySelector("#sex").value    = sex;
     form.querySelector("#weight").value = weight;
   }
 }
 
+// ─── Patient form ─────────────────────────────────────────────────────────────
+
 function handlePatientFormSubmit(event) {
   event.preventDefault();
 
-  const age = getById("age").value.trim();
-  const sex = getById("sex").value.trim();
+  const age    = getById("age").value.trim();
+  const sex    = getById("sex").value.trim();
   const weight = getById("weight").value.trim();
 
-  const ageError = getById("ageError");
-  const sexError = getById("sexError");
+  const ageError    = getById("ageError");
+  const sexError    = getById("sexError");
   const weightError = getById("weightError");
 
-  ageError.textContent = "";
-  sexError.textContent = "";
+  ageError.textContent    = "";
+  sexError.textContent    = "";
   weightError.textContent = "";
 
   let valid = true;
 
-  if (!age) {
-    ageError.textContent = "Required";
-    valid = false;
-  }
-
-  if (!sex) {
-    sexError.textContent = "Required";
-    valid = false;
-  }
-
-  if (!weight || Number(weight) <= 0) {
-    weightError.textContent = "Required (must be greater than 0)";
-    valid = false;
-  }
+  if (!age)                           { ageError.textContent    = "Required"; valid = false; }
+  if (!sex)                           { sexError.textContent    = "Required"; valid = false; }
+  if (!weight || Number(weight) <= 0) { weightError.textContent = "Required (must be greater than 0)"; valid = false; }
 
   if (!valid) return;
 
-  localStorage.setItem("age", age);
-  localStorage.setItem("sex", sex);
+  localStorage.setItem("age",    age);
+  localStorage.setItem("sex",    sex);
   localStorage.setItem("weight", weight);
 
   window.location.href = "index2.html";
 }
 
+// ─── Symptom helpers ──────────────────────────────────────────────────────────
+
 function filterSymptoms(symptoms) {
-  return symptoms
-    .map((s) => s.toLowerCase().trim())
-    .filter(Boolean);
+  return symptoms.map((s) => s.toLowerCase().trim()).filter(Boolean);
 }
+
+// ─── Rule-based diagnosis ─────────────────────────────────────────────────────
+
+function ruleBased(userSymptoms) {
+  return diseases
+    .map((d) => {
+      const matched      = d.symptoms.filter((s) => userSymptoms.includes(s));
+      const matchCount   = matched.length;
+      const matchPercent = Math.round((matchCount / d.symptoms.length) * 100);
+      const userCoverage = Math.round((matchCount / userSymptoms.length) * 100);
+      return { disease: d, matchCount, matchPercent, userCoverage, matchedSymptoms: matched };
+    })
+    .filter((item) => item.matchCount > 0)
+    .sort((a, b) => b.matchPercent - a.matchPercent || b.matchCount - a.matchCount);
+}
+
+function renderResults(matches) {
+  const resultEl  = getById("result");
+  const loadingEl = getById("loading");
+
+  if (!resultEl) return;
+  if (loadingEl) loadingEl.textContent = "";
+
+  if (!matches.length) {
+    resultEl.innerHTML = `<p>No diseases matched your symptoms. Please consult a doctor.</p>`;
+    return;
+  }
+
+  resultEl.innerHTML = matches
+    .slice(0, 4)
+    .map(({ disease, matchPercent, userCoverage, matchCount, matchedSymptoms }) => `
+      <div class="disease-card" style="
+        background: rgba(255,255,255,0.92);
+        border: 1px solid rgba(11,110,172,0.2);
+        border-radius: 14px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 8px 24px rgba(15,23,42,0.08);
+      ">
+        <h3 style="margin-top:0; color: #064c74;">${disease.name}</h3>
+        <p><strong>Match:</strong> ${matchPercent}% of disease symptoms (${matchCount}/${disease.symptoms.length})</p>
+        <p><strong>Your symptoms covered:</strong> ${userCoverage}%</p>
+        <p><strong>Matched symptoms:</strong> ${matchedSymptoms.join(", ")}</p>
+        <p><strong>Suggested medication:</strong> ${disease.medication}</p>
+        <p><strong>Prevention:</strong> ${disease.prevention}</p>
+      </div>
+    `)
+    .join("");
+}
+
+// ─── Diagnosis form ───────────────────────────────────────────────────────────
+
+function handleDiagnosisFormSubmit(event) {
+  event.preventDefault();
+
+  const symptomInput  = getById("symptoms");
+  const symptomsError = getById("symptomsError");
+
+  if (!symptomInput || !symptomsError) return;
+
+  symptomsError.textContent = "";
+
+  const symptoms = filterSymptoms(symptomInput.value.split(","));
+
+  if (!symptoms.length) {
+    symptomsError.textContent = "Please enter at least one symptom.";
+    return;
+  }
+
+  const matches = ruleBased(symptoms);
+  renderResults(matches);
+}
+
+// ─── Disease cards & modal ────────────────────────────────────────────────────
 
 function getYouTubeEmbedUrl(url) {
   try {
     const parsed = new URL(url);
-    const host = parsed.hostname.toLowerCase();
+    const host   = parsed.hostname.toLowerCase();
 
     if (host.includes("youtu.be")) {
       const id = parsed.pathname.slice(1);
@@ -178,22 +245,19 @@ function getYouTubeEmbedUrl(url) {
     }
 
     if (host.includes("youtube.com")) {
-      // Already an embed URL
       if (parsed.pathname.startsWith("/embed/")) return url;
-
       const v = parsed.searchParams.get("v");
       if (v) return `https://www.youtube.com/embed/${v}`;
     }
   } catch {
     // Not a valid URL
   }
-
   return null;
 }
 
 function createVideoEmbedHtml(videoSrc) {
   if (!navigator.onLine) {
-    return '<p>Video requires an internet connection to load.</p>';
+    return "<p>Video requires an internet connection to load.</p>";
   }
 
   const embedUrl = getYouTubeEmbedUrl(videoSrc);
@@ -221,16 +285,15 @@ function createVideoEmbedHtml(videoSrc) {
 }
 
 function openModal(disease) {
-  const modal = getById("diseaseModal");
-  const title = getById("modalTitle");
-  const description = getById("modalDescription");
+  const modal          = getById("diseaseModal");
+  const title          = getById("modalTitle");
+  const description    = getById("modalDescription");
   const videoContainer = getById("modalVideoContainer");
 
   if (!modal || !title || !description || !videoContainer) return;
 
-  title.textContent = disease.name;
-  description.textContent = disease.description;
-
+  title.textContent        = disease.name;
+  description.textContent  = disease.description;
   videoContainer.innerHTML = createVideoEmbedHtml(disease.video);
 
   modal.removeAttribute("hidden");
@@ -249,15 +312,11 @@ function setupModalHandlers() {
   if (!modal) return;
 
   modal.addEventListener("click", (event) => {
-    if (event.target.matches("[data-close]")) {
-      closeModal();
-    }
+    if (event.target.matches("[data-close]")) closeModal();
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeModal();
-    }
+    if (event.key === "Escape") closeModal();
   });
 }
 
@@ -268,8 +327,8 @@ function renderDiseaseCards() {
   grid.innerHTML = "";
 
   diseases.forEach((disease) => {
-    const card = document.createElement("button");
-    card.type = "button";
+    const card     = document.createElement("button");
+    card.type      = "button";
     card.className = "card";
 
     const safeName = disease.name
@@ -279,7 +338,7 @@ function renderDiseaseCards() {
     const imageUrl = `images/${safeName}.jpg`;
 
     card.innerHTML = `
-      <img src="${imageUrl}" alt="${disease.name} image" onerror="this.src='https://via.placeholder.com/400x225?text=No+image'">
+      <img src="${imageUrl}" alt="${disease.name} image" onerror="this.src='https://placehold.co/400x225/e8f0fe/0b6eac?text=${encodeURIComponent(disease.name)}'">
       <h3>${disease.name}</h3>
       <p>${disease.description}</p>
     `;
@@ -289,93 +348,14 @@ function renderDiseaseCards() {
   });
 }
 
-function renderDiagnosisResults(userSymptoms) {
-  const result = getById("result");
-  const loading = getById("loading");
-
-  if (!result || !loading) return;
-
-  if (!userSymptoms.length) {
-    result.innerHTML = `<p class="field-error">Please enter at least one symptom.</p>`;
-    loading.textContent = "";
-    return;
-  }
-
-  loading.textContent = "Analyzing symptoms...";
-
-  setTimeout(() => {
-    const matches = diseases
-      .map((d) => {
-        const totalSymptoms = d.symptoms.length;
-        const matched = d.symptoms.filter((s) => userSymptoms.includes(s));
-        const matchCount = matched.length;
-        const matchPercent = Math.round((matchCount / totalSymptoms) * 100);
-        const userCoverage = Math.round((matchCount / userSymptoms.length) * 100);
-
-        return {
-          disease: d,
-          matchCount,
-          matchPercent,
-          userCoverage,
-          matchedSymptoms: matched
-        };
-      })
-      .filter((item) => item.matchCount > 0)
-      .sort((a, b) => b.matchPercent - a.matchPercent || b.matchCount - a.matchCount);
-
-    if (!matches.length) {
-      result.innerHTML = `<p>No diseases matched your symptoms. Please consult a doctor.</p>`;
-    } else {
-      result.innerHTML = matches
-        .slice(0, 4)
-        .map((match) => {
-          const { disease, matchPercent, userCoverage, matchCount, matchedSymptoms } = match;
-          return `
-            <div class="disease-card">
-              <h3>${disease.name}</h3>
-              <p><strong>Match:</strong> ${matchPercent}% of disease symptoms (${
-            matchCount
-          }/${disease.symptoms.length})</p>
-              <p><strong>Coverage:</strong> ${userCoverage}% of your symptoms matched</p>
-              <p><strong>Matched symptoms:</strong> ${matchedSymptoms.join(", ")}</p>
-              <p><strong>Medication:</strong> ${disease.medication}</p>
-              <p><strong>Prevention:</strong> ${disease.prevention}</p>
-            </div>
-          `;
-        })
-        .join("");
-    }
-
-    loading.textContent = "";
-  }, 1200);
-}
-
-function handleDiagnosisFormSubmit(event) {
-  event.preventDefault();
-
-  const symptomInput = getById("symptoms");
-  const symptomsError = getById("symptomsError");
-
-  if (!symptomInput || !symptomsError) return;
-
-  symptomsError.textContent = "";
-
-  const symptoms = filterSymptoms(symptomInput.value.split(","));
-
-  if (!symptoms.length) {
-    symptomsError.textContent = "Please enter at least one symptom.";
-    return;
-  }
-
-  renderDiagnosisResults(symptoms);
-}
+// ─── Contact form ─────────────────────────────────────────────────────────────
 
 function handleContactFormSubmit(event) {
   event.preventDefault();
 
-  const name = getById("name");
-  const email = getById("email");
-  const message = getById("message");
+  const name     = getById("name");
+  const email    = getById("email");
+  const message  = getById("message");
   const feedback = getById("contactFeedback");
 
   if (!name || !email || !message || !feedback) return;
@@ -385,28 +365,31 @@ function handleContactFormSubmit(event) {
     return;
   }
 
-  // This demo does not send messages anywhere; it just provides confirmation.
   feedback.textContent = "Thank you! Your message has been received.";
   feedback.style.color = "var(--primary-2)";
 
-  name.value = "";
-  email.value = "";
+  name.value    = "";
+  email.value   = "";
   message.value = "";
 }
 
+// ─── Background slideshow ─────────────────────────────────────────────────────
+
 function initSlideshow() {
-  const slides = document.querySelectorAll('.bg-slide');
+  const slides = document.querySelectorAll(".bg-slide");
   if (!slides.length) return;
 
   let current = 0;
-  slides[current].classList.add('active');
+  slides[current].classList.add("active");
 
   setInterval(() => {
-    slides[current].classList.remove('active');
+    slides[current].classList.remove("active");
     current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
-  }, 5000); // change every 5 seconds
+    slides[current].classList.add("active");
+  }, 5000);
 }
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
 
 function init() {
   setYear();
