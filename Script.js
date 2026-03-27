@@ -335,10 +335,15 @@ function renderDiseaseCards() {
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "_")
       .replace(/^_+|_+$/g, "");
-    const imageUrl = `images/${safeName}.jpg`;
+    // Try .jpeg first, fall back to .jpg, then placeholder
+    const imageUrl = `images/${safeName}.jpeg`;
+    const fallbackUrl = `images/${safeName}.jpg`;
+    const placeholder = `https://placehold.co/400x225/e8f0fe/0b6eac?text=${encodeURIComponent(disease.name)}`;
 
     card.innerHTML = `
-      <img src="${imageUrl}" alt="${disease.name} image" onerror="this.src='https://placehold.co/400x225/e8f0fe/0b6eac?text=${encodeURIComponent(disease.name)}'">
+      <img src="${imageUrl}" alt="${disease.name} image"
+           onerror="if(this.src.endsWith('.jpeg')){this.src='${fallbackUrl}'}else{this.src='${placeholder}'}"
+      >
       <h3>${disease.name}</h3>
       <p>${disease.description}</p>
     `;
