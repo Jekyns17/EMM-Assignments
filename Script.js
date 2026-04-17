@@ -20,7 +20,7 @@ const diseases = [
     symptoms: ["fever", "cough", "tiredness", "loss of taste or smell", "shortness of breath", "sore throat"],
     medication: "Seek medical care; follow local health guidelines and supportive treatment.",
     prevention: "Vaccination, wear masks in crowded places, and maintain physical distance.",
-    video: "https://www.youtube.com/watch?v=BtN-goy9VOY",
+    video: "https://youtu.be/eDtKGF9xDLQ?si=lnEK74lA5jG_Fz0N",
     description: "A respiratory illness caused by the SARS-CoV-2 virus."
   },
   {
@@ -28,7 +28,7 @@ const diseases = [
     symptoms: ["shortness of breath", "wheezing", "chest tightness", "coughing"],
     medication: "Inhalers (bronchodilators), corticosteroids",
     prevention: "Avoid triggers, follow an asthma action plan, and use medications as prescribed.",
-    video: "https://www.youtube.com/watch?v=p5ZkZ1mNQ7I",
+    video: "https://youtu.be/KM72Bo59Isg?si=vaxhybwkLnQbHXJH",
     description: "A chronic lung condition that causes airways to narrow and swell."
   },
   {
@@ -36,7 +36,7 @@ const diseases = [
     symptoms: ["headache", "nausea", "sensitivity to light", "sensitivity to sound", "aura"],
     medication: "Pain relievers, triptans, and anti-nausea medication",
     prevention: "Manage stress, avoid triggers, and maintain a regular sleep schedule.",
-    video: "https://www.youtube.com/watch?v=QLg25iR9bFA",
+    video: "https://youtu.be/UqEQmrBlewM?si=8PZFXsX74CRDkSxJ",
     description: "A neurological condition that causes intense, recurring headaches."
   },
   {
@@ -52,7 +52,7 @@ const diseases = [
     symptoms: ["fever", "chills", "sweating", "headache", "muscle pain", "nausea"],
     medication: "Antimalarial drugs prescribed by a doctor",
     prevention: "Use mosquito nets and repellents.",
-    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    video: "https://youtu.be/GZsjHXUjRlM?si=-IKQ1LalnwMyRCfH",
     description: "A parasitic infection transmitted by mosquitoes."
   },
   {
@@ -60,7 +60,7 @@ const diseases = [
     symptoms: ["weight loss", "fever", "night sweats", "fatigue", "recurrent infections", "swollen lymph nodes"],
     medication: "Antiretroviral therapy (ART)",
     prevention: "Practice safe sex and avoid sharing needles.",
-    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    video: "https://youtu.be/lowauFSefOM?si=QOHGfZSfxhpGM8JC",
     description: "A virus that attacks the immune system over time."
   },
   {
@@ -68,7 +68,7 @@ const diseases = [
     symptoms: ["persistent cough", "chest pain", "fever", "night sweats", "weight loss", "coughing blood"],
     medication: "Antibiotics (DOTS regimen)",
     prevention: "Early diagnosis and treatment, BCG vaccination.",
-    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    video: "https://youtu.be/oh8b0WOOZPM?si=yAl6oVdkZfIRxqzD",
     description: "A bacterial infection that mostly affects the lungs."
   },
   {
@@ -76,7 +76,7 @@ const diseases = [
     symptoms: ["watery diarrhea", "vomiting", "dehydration", "muscle cramps", "rapid heart rate"],
     medication: "Oral rehydration solution (ORS), antibiotics in severe cases",
     prevention: "Drink clean water and maintain sanitation.",
-    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    video: "https://youtu.be/kuliQhjco9g?si=DATdM6H_hZJCQW0M",
     description: "A bacterial infection causing severe dehydration."
   },
   {
@@ -84,7 +84,7 @@ const diseases = [
     symptoms: ["fever", "itchy rash", "blisters", "fatigue"],
     medication: "Antihistamines, calamine lotion, antiviral medication in severe cases",
     prevention: "Vaccination (varicella vaccine)",
-    video: "https://www.youtube.com/watch?v=Q0gKfPpVw7M",
+    video: "https://youtu.be/UjWiqMut81A?si=_Ug02rFoMaGHr3qO",
     description: "A viral infection that causes an itchy, blister-like rash."
   },
   {
@@ -92,7 +92,7 @@ const diseases = [
     symptoms: ["painful blisters", "itching", "burning sensation"],
     medication: "Antiviral drugs (acyclovir, valacyclovir)",
     prevention: "Avoid sexual contact during outbreaks, use protection.",
-    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    video: "https://youtu.be/j2_vdpPuivE?si=z22nwBElcX0klQaO",
     description: "A common viral infection causing recurrent sores."
   }
 ];
