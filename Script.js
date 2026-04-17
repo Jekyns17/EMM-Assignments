@@ -8,7 +8,7 @@ const diseases = [
     description: "A common viral infection that affects the nose, throat, and lungs."
   },
   {
-    name: "Common Cold",
+    name: "Common-cold",
     symptoms: ["sneezing", "runny nose", "sore throat", "cough", "mild fever", "headache"],
     medication: "Rest, fluids, decongestants, throat lozenges",
     prevention: "Wash hands, cover coughs, and avoid close contact with sick people.",
