@@ -12,7 +12,7 @@ const diseases = [
     symptoms: ["sneezing", "runny nose", "sore throat", "cough", "mild fever", "headache"],
     medication: "Rest, fluids, decongestants, throat lozenges",
     prevention: "Wash hands, cover coughs, and avoid close contact with sick people.",
-    video: "https://www.youtube.com/watch?v=5Gv7EFaF5NI",
+    video: "https://youtu.be/BGTsyYQq0xs?si=34YrWFl0Mmeh74Am",
     description: "A mild viral infection of the upper respiratory tract."
   },
   {
